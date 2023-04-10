@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import {useForm} from 'react-hook-form'
 import './App.css'
+import Form from './Components/Form';
 
 function App() {
   const [show, setShow] = useState({
@@ -28,12 +29,23 @@ function App() {
     }
   };
   
-  const { register, handleSubmit} = useForm({mode: "onBlur"});
+  const { register, unregister, handleSubmit} = useForm({mode: "onBlur"});
+
+
+  const handleInfo = (data) => {
+    console.log(data);
+  }
 
   return (
     <div className="App">
       <div className={show.divForm}>
         <h1>Preencha o formulario abaixo</h1>
+        <Form
+        register={register}
+        unregister={unregister}
+        handleSubmit={handleSubmit}
+        handleInfo={handleInfo}
+        />
       </div>
       
     </div>

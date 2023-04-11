@@ -11,7 +11,6 @@ function App() {
   });
 
   const handleShow = () => {
-    console.log("foi");
     if (show.showForm === true) {
       setShow({
         divForm: "hide",
@@ -20,7 +19,6 @@ function App() {
       });
       console.log(show);
     } else {
-      console.log("foi pro else");
       setShow({
         divForm: "show",
         divThanks: "hide",
@@ -29,11 +27,21 @@ function App() {
     }
   };
   
-  const { register, unregister, handleSubmit} = useForm({mode: "onBlur"});
+  const { register, unregister, handleSubmit, reset} = useForm();
 
+  const [resp, setResp] = useState({
+    nome:'',
+  });
+  const [term, setTerm] = useState({
+    nome:'',
+  });
 
   const handleInfo = (data) => {
-    console.log(data);
+    
+    setResp(data)
+    setTerm(Object.keys(data));
+    reset(); 
+    handleShow();
   }
 
   return (
@@ -48,6 +56,21 @@ function App() {
         />
       </div>
       
+      <div className={show.divThanks}>
+        <h1>Obrigado!</h1>
+        <h3>Recebemos sua solicitação e em breve entraremos em contato</h3>
+        <div>
+        {Object.keys(resp).map((key, index) => {
+            return (
+              <p key={index} className="texto">
+                 {key} : {resp[key]}
+              </p>
+            );
+          })}
+        </div>
+        <button onClick={handleShow}  className='btn'>Refazer a solicitação? </button>
+      </div>
+      <span>Produzido por <a href="https://github.com/GabrielMoreiraB">Gabriel Moreira</a></span>
     </div>
   )
 }

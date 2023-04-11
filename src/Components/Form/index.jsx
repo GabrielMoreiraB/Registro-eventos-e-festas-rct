@@ -3,7 +3,7 @@ import Campo from "../Campo";
 import ListaSuspensa from '../ListaSuspensa';
 import { useState } from 'react'
 
-const Form = ({ register, unregister, handleSubmit, handleInfo})=> {
+const Form = ({ register, unregister, handleSubmit, handleInfo, errors})=> {
     const [whathType, setWhathType] = useState(false)
     const [find, setFind] = useState(false)
     const [bdayType, setBdayType] = useState(false)
@@ -56,7 +56,9 @@ const Form = ({ register, unregister, handleSubmit, handleInfo})=> {
                 type='text'
                 register={register}
                 obrigatorio={true}
+                errors = {errors}
                 />
+                
 
                 <ListaSuspensa
                 name='eventType'
@@ -128,7 +130,7 @@ const Form = ({ register, unregister, handleSubmit, handleInfo})=> {
                 {bdayType && <Campo
                     label='Gênero do Aniversariante'
                     name='bdayGender'
-                    type='number'
+                    type='text'
                     register={register}
                     obrigatorio={true}/>
                 }  
@@ -150,7 +152,7 @@ const Form = ({ register, unregister, handleSubmit, handleInfo})=> {
                     obrigatorio={true}/>}
                 
 
-                <input type="submit" value="Enviar" />
+                <input type="submit" value="Enviar" className='btn'/>
             </form>
         </section>
     )
